@@ -2,6 +2,7 @@
 import plistlib
 import subprocess
 import sys
+import os
 
 """
              Name:  Automated_DS_Workflows.py
@@ -10,10 +11,13 @@ import sys
                     Per Olofsson for original PyObjC trigger script. http://www.deploystudio.com/Forums/viewtopic.php?pid=11522#p11522
                     Nate Felton for telling me about DS triggers.
            Author:  Erik Gomez <e@eriknicolasgomez.com>
-          Created:  2015-07-30
-    Last Modified:  2015-07-30
-          Version:  1.0
+          Created:  2015-07-03
+    Last Modified:  2015-08-03
+          Version:  1.01
 """
+
+# Rather than import the module like a sane person, let's just do this.
+os.chdir(sys.path[0])
 
 def trigger(arg):
     # Method for calling Per's PyObjC script.
