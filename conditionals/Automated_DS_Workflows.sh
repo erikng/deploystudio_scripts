@@ -5,9 +5,9 @@
 #           Thanks:  Per Olofsson for original PyObjC trigger script. http://www.deploystudio.com/Forums/viewtopic.php?pid=11522#p11522
 #                    Nate Felton for telling me about DS triggers.
 #           Author:  Erik Gomez <e@eriknicolasgomez.com>
-#          Created:  2015-07-30
-#    Last Modified:  2015-07-30
-#          Version:  1.0
+#          Created:  2015-08-03
+#    Last Modified:  2015-08-03
+#          Version:  1.01
 
 # Tool to display a popup message with buttons.
 POPUP=`dirname "$0"`/trigger.py
@@ -21,7 +21,7 @@ POPUP=`dirname "$0"`/trigger.py
 # 5. Be mindful of screen space. 6 variables and an abort are probably the max you should use.
 # 6. RuntimeSelectWorkflow can reference DS UUID's but they become difficult to track. Use names that you don't plan to change.
 
-retval=`$POPUP -b 'Abort' -b 'El Capitan' -b 'Yosemite' -b 'Mavericks' -i "Please note that El Capitan is currently in beta." "Please select the image type"`
+retval=`$POPUP -b 'Abort' -b 'El Capitan' -b 'Yosemite' -b 'Mavericks' -i "Please select the image type. Note: El Capitan is currently in BETA." "Machine Detected"`
 case $retval in
 	1000) # Abort
 		echo "RuntimeAbortWorkflow: User Aborted!"

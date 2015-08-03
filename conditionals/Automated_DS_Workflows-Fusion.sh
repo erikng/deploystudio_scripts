@@ -8,9 +8,9 @@
 #           Thanks:  Per Olofsson for original PyObjC trigger script. http://www.deploystudio.com/Forums/viewtopic.php?pid=11522#p11522
 #                    Nate Felton for telling me about DS triggers.
 #           Author:  Erik Gomez <e@eriknicolasgomez.com>
-#          Created:  2015-07-30
-#    Last Modified:  2015-07-30
-#          Version:  1.0
+#          Created:  2015-08-03
+#    Last Modified:  2015-08-03
+#          Version:  1.01
 
 # Tool to display a popup message with buttons.
 POPUP=`dirname "$0"`/trigger.py
@@ -32,7 +32,7 @@ CHECKFUSION=`system_profiler SPStorageDataType | grep "Medium Type"`
 if [[ "$Hardware_ID" == *iMac* ]] && [[ "${CHECKFUSION}" == *"SSD"* && *"Rotational"* ]]
     then
         # Only iMacs have fusion drive. Give them all the options
-        retval=`$POPUP -b 'Abort' -b 'El Capitan' -b 'Yosemite' -b 'Mavericks' -i "Please note that El Capitan is currently in beta. Fusion Drive detected." "Please select the image type"`
+        retval=`$POPUP -b 'Abort' -b 'El Capitan' -b 'Yosemite' -b 'Mavericks' -i "Please select the image type. Note: El Capitan is currently in BETA." "Fusion Drive Detected"`
         case $retval in
             1000) # Abort
                 # Stop workflow
@@ -51,7 +51,7 @@ if [[ "$Hardware_ID" == *iMac* ]] && [[ "${CHECKFUSION}" == *"SSD"* && *"Rotatio
         esac
     else
         # All other models only need the basic three options.
-        retval=`$POPUP -b 'Abort' -b 'El Capitan' -b 'Yosemite' -b 'Mavericks' -i "Please note that El Capitan is currently in beta." "Please select the image type"`
+        retval=`$POPUP -b 'Abort' -b 'El Capitan' -b 'Yosemite' -b 'Mavericks' -i "Please select the image type. Note: El Capitan is currently in BETA." "Machine Detected"`
         case $retval in
             1000) # Abort
                 # Stop workflow

@@ -13,13 +13,14 @@ import os
            Author:  Erik Gomez <e@eriknicolasgomez.com>
           Created:  2015-07-03
     Last Modified:  2015-08-03
-          Version:  1.02
+          Version:  1.03
 """
 
 def trigger(arg):
     # Method for calling Per's PyObjC script.
 	# Environmental DS Variable (Thanks Tim Sutton!)
     triggerpy = os.path.join(os.environ['DS_REPOSITORY_PATH'], 'Scripts', 'trigger.py')
+    # triggerpy = sys.path[0] + '/trigger.py' # Useful for local testing - Comment out line above.
     cmd = ['python', triggerpy] + arg
     proc = subprocess.Popen(cmd, shell=False, bufsize=-1,
                             stdin=subprocess.PIPE,
@@ -37,7 +38,7 @@ def trigger(arg):
 # 5. Be mindful of screen space. 6 variables and an abort are probably the max you should use.
 # 6. RuntimeSelectWorkflow can reference DS UUID's but they become difficult to track. Use names that you don't plan to change.
 
-arg = ['-b', 'Abort', '-b', 'El Capitan', '-b', 'Yosemite', '-b', 'Mavericks', '-i', 'Please note that El Capitan is currently in beta.', 'Please select the image type']
+arg = ['-b', 'Abort', '-b', 'El Capitan', '-b', 'Yosemite', '-b', 'Mavericks', '-i', 'Please select the image type. Note: El Capitan is currently in BETA.', 'Machine Detected']
 
 buttonPressed = trigger(arg)
 
