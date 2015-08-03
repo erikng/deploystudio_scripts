@@ -13,15 +13,14 @@ import os
            Author:  Erik Gomez <e@eriknicolasgomez.com>
           Created:  2015-07-03
     Last Modified:  2015-08-03
-          Version:  1.01
+          Version:  1.02
 """
-
-# Rather than import the module like a sane person, let's just do this.
-os.chdir(sys.path[0])
 
 def trigger(arg):
     # Method for calling Per's PyObjC script.
-    cmd = ['python', 'trigger.py'] + arg
+	# Environmental DS Variable (Thanks Tim Sutton!)
+    triggerpy = os.path.join(os.environ['DS_REPOSITORY_PATH'], 'Scripts', 'trigger.py')
+    cmd = ['python', triggerpy] + arg
     proc = subprocess.Popen(cmd, shell=False, bufsize=-1,
                             stdin=subprocess.PIPE,
                             stdout=subprocess.PIPE,

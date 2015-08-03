@@ -17,11 +17,8 @@ import os
            Author:  Erik Gomez <e@eriknicolasgomez.com>
           Created:  2015-08-03
     Last Modified:  2015-08-03
-          Version:  1.01
+          Version:  1.02
 """
-
-# Rather than import the module like a sane person, let's just do this.
-os.chdir(sys.path[0])
 
 # eventually move to diskutil list -plist  & diskutil info -plist disk0/etc. Easier to parse.
 
@@ -76,7 +73,9 @@ def get_medium_type_cs_disk(disk_id):
 
 def trigger(arg):
     # Method for calling Per's PyObjC script.
-    cmd = ['python', 'trigger.py'] + arg
+	# Environmental DS Variable (Thanks Tim Sutton!)
+    triggerpy = os.path.join(os.environ['DS_REPOSITORY_PATH'], 'Scripts', 'trigger.py')
+    cmd = ['python', triggerpy] + arg
     proc = subprocess.Popen(cmd, shell=False, bufsize=-1,
                             stdin=subprocess.PIPE,
                             stdout=subprocess.PIPE,
@@ -118,6 +117,10 @@ if 'iMac' in get_model_identifier():
 			print "No HDD detected on disk1. iMac is not a Fusion Drive, but does contain a Core Storage"
 			isfusion = "0"
 			buttonPressed = trigger(normal)
+    else:
+        print "This iMac is not a Fusion Drive."
+        isfusion = "0"
+        buttonPressed = trigger(normal)
 else:
 	print "This machine is not an iMac"
 	isfusion = "0"
