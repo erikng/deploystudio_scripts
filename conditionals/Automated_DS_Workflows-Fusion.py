@@ -94,7 +94,7 @@ def trigger(arg):
 # 6. RuntimeSelectWorkflow can reference DS UUID's but they become difficult to track. Use names that you don't plan to change.
 
 normal = ['-b', 'Abort', '-b', 'El Capitan', '-b', 'Yosemite', '-b', 'Mavericks', '-i', 'Please note that El Capitan is currently in beta.', 'Please select the image type']
-fd = ['-b', 'Abort', '-b', 'El Capitan', '-b', 'Yosemite', '-b', 'Mavericks', '-i', 'Please note that El Capitan is currently in beta. Fusion Drive detected.', 'Please select the image type']
+fusion = ['-b', 'Abort', '-b', 'El Capitan', '-b', 'Yosemite', '-b', 'Mavericks', '-i', 'Please note that El Capitan is currently in beta. Fusion Drive detected.', 'Please select the image type']
 
 if 'iMac' in get_model_identifier():
     print "iMac detected"
@@ -102,28 +102,28 @@ if 'iMac' in get_model_identifier():
         print "SSD detected on disk0 - continuing check"
         if 'rotational' in get_medium_type_disk(1):
 			print "HDD detected on disk1. Assuming Fusion Drive"
-			fusion = "1"
-			buttonPressed = trigger(fd)
+			isfusion = "1"
+			buttonPressed = trigger(fusion)
         else:
 			print "No HDD detected on disk1. iMac is not a Fusion Drive."
-			fusion = "0"
+			isfusion = "0"
 			buttonPressed = trigger(normal)
     elif 'ssd' in get_medium_type_cs_disk(0):
 		print "SSD detected on disk0 (Core Storage) - continuing check"
 		if 'rotational' in get_medium_type_cs_disk(1):
 			# print "HDD detected on disk1 (Core Storage). Assuming Fusion Drive (Core Storage)"
-			fusion = "1"
-			buttonPressed = trigger(fd)
+			isfusion = "1"
+			buttonPressed = trigger(fusion)
 		else:
 			print "No HDD detected on disk1. iMac is not a Fusion Drive, but does contain a Core Storage"
-			fusion = "0"
+			isfusion = "0"
 			buttonPressed = trigger(normal)
 else:
 	print "This machine is not an iMac"
-	fusion = "0"
+	isfusion = "0"
 	buttonPressed = trigger(normal)
 
-if "0" in fusion:
+if "0" in isfusion:
 	if "1000" in buttonPressed:
 		# Abort
 		print "RuntimeAbortWorkflow: User Aborted!"
@@ -137,7 +137,7 @@ if "0" in fusion:
 	elif "1003" in buttonPressed:
 		# Abort
 		print "RuntimeSelectWorkflow: Mavericks"
-if "1" in fusion:
+if "1" in isfusion:
 	if "1000" in buttonPressed:
 		# Abort
 		print "RuntimeAbortWorkflow: User Aborted!"
