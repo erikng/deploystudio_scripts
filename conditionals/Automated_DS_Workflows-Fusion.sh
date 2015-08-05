@@ -31,7 +31,7 @@ CHECKFUSION=`system_profiler SPStorageDataType | grep "Medium Type"`
 # echo the workflow ID or title prefixed by "RuntimeSelectWorkflow:" according to the machine model
 if [[ "$Hardware_ID" == *iMac* ]] && [[ "${CHECKFUSION}" == *"SSD"* && *"Rotational"* ]]
     then
-        # Only iMacs have fusion drive. Give them all the options
+        # Only iMacs have fusion drive.
         retval=`$POPUP -b 'Abort' -b 'El Capitan' -b 'Yosemite' -b 'Mavericks' -i "Please select the image type. Note: El Capitan is currently in BETA." "Fusion Drive Detected"`
         case $retval in
             1000) # Abort
@@ -39,18 +39,18 @@ if [[ "$Hardware_ID" == *iMac* ]] && [[ "${CHECKFUSION}" == *"SSD"* && *"Rotatio
                 echo "RuntimeAbortWorkflow: User Aborted!"
                 exit 1
                 ;;
-            1001) # School Employee (Non-Schools) Fusion Drive
+            1001) # El_Capitan-Fusion_Drive
                 echo "RuntimeSelectWorkflow: El_Capitan-Fusion_Drive"
                 ;;
-            1002) # School Student Fusion Drive
+            1002) # Yosemite-Fusion_Drive
                 echo "RuntimeSelectWorkflow: Yosemite-Fusion_Drive"
                 ;;
-            1003) # School Employee Fusion Drive
+            1003) # Mavericks-Fusion_Drive
                 echo "RuntimeSelectWorkflow: Mavericks-Fusion_Drive"
                 ;;
         esac
     else
-        # All other models only need the basic three options.
+        # All other models
         retval=`$POPUP -b 'Abort' -b 'El Capitan' -b 'Yosemite' -b 'Mavericks' -i "Please select the image type. Note: El Capitan is currently in BETA." "Machine Detected"`
         case $retval in
             1000) # Abort
@@ -58,13 +58,13 @@ if [[ "$Hardware_ID" == *iMac* ]] && [[ "${CHECKFUSION}" == *"SSD"* && *"Rotatio
                 echo "RuntimeAbortWorkflow: User Aborted!"
                 exit 1
                 ;;
-            1001) # School Employee (Non-Schools) Non-Fusion Drive
+            1001) # El_Capitan
                 echo "RuntimeSelectWorkflow: El_Capitan"
                 ;;
-            1002) # School Student Non-Fusion Drive
+            1002) # Yosemite
                 echo "RuntimeSelectWorkflow: Yosemite"
                 ;;
-            1003) # School Employee Non-Fusion Drive
+            1003) # Mavericks
                 echo "RuntimeSelectWorkflow: Mavericks"
                 ;;
         esac
