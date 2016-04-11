@@ -47,21 +47,21 @@ def get_medium_type_disk(disk_id):
     except Exception:
         return {}
 
-if 'iMac' in get_model_identifier():
-    print "iMac detected"
+if 'iMac' in get_model_identifier() or 'Macmini' in get_model_identifier():
+    print "Fusion Drive may be possible on this model."
     if get_medium_type_disk(0) is True:
         print "SSD detected on disk0 - continuing check"
         if get_medium_type_disk(1) is False:
 			print "HDD detected on disk1. Assuming Fusion Drive"
 			isfusion = "1"
         else:
-			print "No HDD detected on disk1. iMac is not a Fusion Drive."
+			print "No HDD detected on disk1. This Mac does not have a Fusion Drive."
 			isfusion = "0"
     else:
         print "This iMac is not a Fusion Drive."
         isfusion = "0"
 else:
-	print "This machine is not an iMac"
+	print "This Mac does not have a Fusion Drive."
 	isfusion = "0"
 
 if "0" in isfusion:
